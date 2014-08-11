@@ -34,7 +34,7 @@
 		public function load($file, $append = false) 
 		{
 			// create the database
-			$this->db->prepare("CREATE TABLE IF NOT EXISTS queries (id INTEGER NOT NULL, time INTEGER NOT NULL, user VARCHAR(128), host VARCHAR(512), ip VARCHAR(128), execute_time TEXT, lock_time TEXT, rows_sent INTEGER, rows_examined INTEGER, query TEXT, PRIMARY KEY (id))")->execute();
+			$this->db->prepare("CREATE TABLE IF NOT EXISTS queries (id INTEGER NOT NULL AUTO_INCREMENT, time INTEGER NOT NULL, user VARCHAR(128), host VARCHAR(512), ip VARCHAR(128), execute_time TEXT, lock_time TEXT, rows_sent INTEGER, rows_examined INTEGER, query TEXT, PRIMARY KEY (id))")->execute();
 			// open up the slow log for reading
 			$this->fp = fopen($file, 'rb');
 			$this->stmt = $this->db->prepare("INSERT INTO queries (time, user, host, ip, execute_time, lock_time, rows_sent, rows_examined, query) VALUES (:time, :user, :host, :ip, :execute_time, :lock_time, :rows_sent, :rows_examined, :query)");
